@@ -1,0 +1,82 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Listado de Películas";
+}
+<h1>Listado de Películas</h1>
+<div class="container">
+    <div class="row">
+        @foreach (var pelicula in Model.Peliculas)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    @if (!string.IsNullOrEmpty(pelicula.UrlVideo))
+                    {
+                        var embedUrl = pelicula.UrlVideo.Replace("watch?v=", "embed/");
+                        <iframe class="card-img-top" src="https://www.youtube-nocookie.com/embed/@embedUrl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@pelicula.Titulo</h5>
+                        <p class="card-text"><strong>Director:</strong> @pelicula.Director</p>
+                        <p class="card-text">@pelicula.Descripcion</p>
+                        <p class="card-text"><strong>Género:</strong> @pelicula.Genero</p>
+                        <p class="card-text"><strong>Fecha de Estreno:</strong> @pelicula.FechaEstreno.ToString("yyyy-MM-dd")</p>
+                        <p class="card-text"><strong>¿Es Estreno?:</strong> @(pelicula.EsEstreno ? "Sí" : "No")</p>
+                        <p class="card-text"><strong>¿Es Animada?:</strong> @(pelicula.EsAnimada ? "Sí" : "No")</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<h2>Marketing de a duro</h2>
+<div class="container">
+    <div class="row" id="book-carousel">
+        <!-- Tarjetas de libros se agregarán aquí -->
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('https://api.escuelajs.co/api/v1/products')
+                .then(response => response.json())
+                .then(data => {
+                    const productCarousel = document.getElementById('book-carousel'); // Asumiendo que tienes un elemento con ID 'book-carousel'
+                    let currentIndex = 0;
+
+                    const displayProducts = () => {
+                        // Limpiar el carrusel antes de agregar nuevos productos
+                        productCarousel.innerHTML = '';
+
+                        // Mostrar solo 6 productos a la vez
+                        for (let i = 0; i < 6; i++) {
+                            if (currentIndex >= data.length) {
+                                currentIndex = 0; // Reiniciar el índice si supera la longitud de los datos
+                            }
+                            const product = data[currentIndex];
+                            const productCard = document.createElement('div');
+                            productCard.classList.add('col-md-2');
+                            productCard.innerHTML = `
+                                        <div class="card mb-2 box-shadow">
+                                            <img src="${product.images[0]}" class="card-img-top" alt="${product.title}">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${product.title}</h5>
+                                                <p class="card-text"><strong>Precio:</strong> $${product.price}</p>
+                                                <p class="card-text"><strong>Categoría:</strong> ${product.category.name}</p>
+                                            </div>
+                                        </div>
+                                    `;
+                            productCarousel.appendChild(productCard);
+                            currentIndex++;
+                        }
+                    };
+
+                    displayProducts();
+                    setInterval(displayProducts, 10000); // Cambiar cada 10 segundos
+                })
+                .catch(error => console.error('Error al cargar los productos:', error));
+        });
+    </script>
+}

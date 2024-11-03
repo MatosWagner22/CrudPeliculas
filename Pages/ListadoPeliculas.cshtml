@@ -1,0 +1,36 @@
+﻿@page
+@model LIstadoPeliculas
+@{
+    ViewData["Title"] = "Listado de Películas";
+}
+
+<h1>Listado de Películas</h1>
+
+<p>
+    <a asp-page="Create">Crear Nueva Película</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Director</th>
+            <th>Fecha de Estreno</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Peliculas)
+        {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>@item.Director</td>
+                <td>@item.FechaEstreno.ToShortDateString()</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-page="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
