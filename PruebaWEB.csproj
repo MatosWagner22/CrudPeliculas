@@ -5,6 +5,61 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Content Remove="Controllers\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <None Remove="Controllers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\3rdpartylicenses.txt" />
+    <Content Remove="wwwroot\browser\favicon.ico" />
+    <Content Remove="wwwroot\browser\index.csr.html" />
+    <Content Remove="wwwroot\browser\index.html" />
+    <Content Remove="wwwroot\browser\main-QVFDRTG3.js" />
+    <Content Remove="wwwroot\browser\polyfills-FFHMD2TL.js" />
+    <Content Remove="wwwroot\browser\styles-5INURTSO.css" />
+    <Content Remove="wwwroot\server\angular-app-engine-manifest.mjs" />
+    <Content Remove="wwwroot\server\angular-app-manifest.mjs" />
+    <Content Remove="wwwroot\server\assets-chunks\index_csr_html.mjs" />
+    <Content Remove="wwwroot\server\assets-chunks\index_html.mjs" />
+    <Content Remove="wwwroot\server\assets-chunks\index_server_html.mjs" />
+    <Content Remove="wwwroot\server\assets-chunks\styles-5INURTSO_css.mjs" />
+    <Content Remove="wwwroot\server\chunk-JYKLRFPO.mjs" />
+    <Content Remove="wwwroot\server\chunk-USV67MHZ.mjs" />
+    <Content Remove="wwwroot\server\chunk-Z5UUC7M5.mjs" />
+    <Content Remove="wwwroot\server\chunk-ZC4BKBJ7.mjs" />
+    <Content Remove="wwwroot\server\index.server.html" />
+    <Content Remove="wwwroot\server\main.server.mjs" />
+    <Content Remove="wwwroot\server\polyfills.server.mjs" />
+    <Content Remove="wwwroot\server\server.mjs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\3rdpartylicenses.txt" />
+    <None Include="wwwroot\browser\favicon.ico" />
+    <None Include="wwwroot\browser\index.csr.html" />
+    <None Include="wwwroot\browser\index.html" />
+    <None Include="wwwroot\browser\main-QVFDRTG3.js" />
+    <None Include="wwwroot\browser\polyfills-FFHMD2TL.js" />
+    <None Include="wwwroot\browser\styles-5INURTSO.css" />
+    <None Include="wwwroot\server\angular-app-engine-manifest.mjs" />
+    <None Include="wwwroot\server\angular-app-manifest.mjs" />
+    <None Include="wwwroot\server\assets-chunks\index_csr_html.mjs" />
+    <None Include="wwwroot\server\assets-chunks\index_html.mjs" />
+    <None Include="wwwroot\server\assets-chunks\index_server_html.mjs" />
+    <None Include="wwwroot\server\assets-chunks\styles-5INURTSO_css.mjs" />
+    <None Include="wwwroot\server\chunk-JYKLRFPO.mjs" />
+    <None Include="wwwroot\server\chunk-USV67MHZ.mjs" />
+    <None Include="wwwroot\server\chunk-Z5UUC7M5.mjs" />
+    <None Include="wwwroot\server\chunk-ZC4BKBJ7.mjs" />
+    <None Include="wwwroot\server\index.server.html" />
+    <None Include="wwwroot\server\main.server.mjs" />
+    <None Include="wwwroot\server\polyfills.server.mjs" />
+    <None Include="wwwroot\server\server.mjs" />
+  </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
@@ -17,12 +72,12 @@
 		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Controllers\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <Content Update="Pages\ListadoPeliculas.cshtml">
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="wwwroot\prerendered-routes.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 </Project>
